@@ -1,0 +1,68 @@
+{
+  "domain": "dianping.com",
+  "attributes": [
+    {
+      "label": "name",
+      "rule": {
+        "type": "css",
+        "value": ".breadcrumb span"
+      }
+    },
+    {
+      "label": "alternateName",
+      "rule": {
+        "type": "regexp",
+        "value": "别(?:&nbsp;)+名：</span>\\s*<span.+>(.+?)</span>"
+      }
+    },
+    {
+      "label": "city",
+      "rule": {
+        "type": "css",
+        "value": ".J-city"
+      }
+    },
+    {
+      "label": "district",
+      "rule": {
+        "type": "css",
+        "value": "span[@itemprop=\"locality region\"]"
+      }
+    },
+    {
+      "label": "streetAddress",
+      "rule": {
+        "type": "css",
+        "value": "span[@itemprop=\"street-address\"]"
+      }
+    },
+    {
+      "label": "tel",
+      "rule": {
+        "type": "css",
+        "value": ".tel .item"
+      }
+    },
+    {
+      "label": "category",
+      "rule": {
+        "type": "css",
+        "value": ".J-current-category"
+      }
+    },
+    {
+      "label": "latitude",
+      "rule": {
+        "type": "regexp",
+        "value": "lat:([\\d.]+)"
+      }
+    },
+    {
+      "label": "longitude",
+      "rule": {
+        "type": "regexp",
+        "value": "lng:([\\d.]+)"
+      }
+    }
+  ]
+}

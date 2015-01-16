@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# -*- coding: UTF-8 -*-
+
+require File.expand_path(File.dirname(__FILE__)) + "/../config/load"
+
+@curl = WWW::Crawler.new
+@cache = CACHE::FileSystem.new
+@logger = Logger.new(STDOUT)
+
+STDIN.each do |line|
+  url = line.strip
+
+  if @cache.exists? url
+    @logger.info "cached " + url
+    next
+  end
+
+  @logger.info "crawling " + url
+  code, header, body = @curl.get(url)
+
+  case code
+  when '200'
+    @cache.put(url, body.first, header)
+  else
+    @logger.warn body.first
+  end
+
+  sleep 0.5
+end
