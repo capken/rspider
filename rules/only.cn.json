@@ -1,0 +1,40 @@
+{
+  "domain": "only.cn",
+  "ruleSets": [
+    {
+      "path": "onlystore/\\d+\\.html$",
+      "attributes": [
+        {
+          "label": "name",
+          "rules": [
+            { "type": "css", "value": ".popProDelRight h3" }
+          ]
+        },
+        {
+          "label": "product_id",
+          "rules": [
+            { "type": "regexp", "value": "产品编号.+?(\\d+)" }
+          ]
+        },
+        {
+          "label": "labeled_price",
+          "rules": [
+            { "type": "css", "value": "#div_price del" }
+          ]
+        },
+        {
+          "label": "sale_price",
+          "rules": [
+            { "type": "css", "value": "#div_price strong" }
+          ]
+        },
+        {
+          "label": "product_info",
+          "rules": [
+            { "type": "css", "value": ".menu_body" }
+          ]
+        }
+      ]
+    }
+  ]
+}
