@@ -1,0 +1,1 @@
+ruby -e "(1..35).each { |i| puts \"http://www.only.cn/webapp/wcs/stores/servlet/CategoryNavigationResultsView?catalogId=10001&langId=-7&storeId=10151&sType=SimpleSearch&pageSize=40&beginIndex=#{i*40-40}&orderBy=1\"}"
