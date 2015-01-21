@@ -10,12 +10,10 @@ require File.expand_path(File.dirname(__FILE__)) + "/../config/load"
 STDIN.each do |line|
   url = line.strip
 
-  if @cache.exists? url
-    body = @cache.get(url)
-    record = @extractor.select url, body
-    record["url"] = url
-
-    puts record.to_json
-  end
+  @cache.get(url) do |body|
+    @extractor.select(url, body) do |record|
+      puts record.to_json
+    end
+  end if @cache.exists?(url)
 end
 
