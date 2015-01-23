@@ -1,2 +1,3 @@
 cache
 Gemfile.lock
+web/db.sqlite3

@@ -12,8 +12,8 @@ module WWW
       @curl = Curl::Easy.new do |c|
         c.follow_location = true
         c.max_redirects = 3
-        c.timeout = 20
-        c.connect_timeout = 10
+        c.timeout = 8
+        c.connect_timeout = 5
         c.headers["User-Agent"] = USER_AGENT
         c.encoding = 'gzip,deflate'
         c.proxy_url = PRIVOXY_URL if opts[:proxy]
