@@ -5,6 +5,7 @@ class SetupPageModel < ActiveRecord::Migration
       t.index :md5
       t.string :url
       t.string :domain
+      t.datetime :last_cached_at
       t.timestamps null: false
     end
   end

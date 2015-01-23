@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(version: 20150123080101) do
     t.string   "md5"
     t.string   "url"
     t.string   "domain"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "last_cached_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "pages", ["md5"], name: "index_pages_on_md5"

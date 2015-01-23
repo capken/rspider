@@ -23,14 +23,14 @@ File.readlines(seeds_file).each do |line|
 end
 
 # create one job
-job = Job.new do |j|
-  j.name = 'sample_job'
-end
-job.save
-
-page_ids.each do |page_id|
-  job.tasks.create(
-    page_id: page_id,
-    status: 'created'
-  )
-end
+#job = Job.new do |j|
+#  j.name = 'sample_job'
+#end
+#job.save
+#
+#page_ids.each do |page_id|
+#  job.tasks.create(
+#    page_id: page_id,
+#    status: 'created'
+#  )
+#end
