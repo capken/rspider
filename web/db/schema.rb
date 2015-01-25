@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123080101) do
+ActiveRecord::Schema.define(version: 20150124082524) do
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150123080101) do
     t.datetime "last_cached_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "status_code"
   end
 
   add_index "pages", ["md5"], name: "index_pages_on_md5"
