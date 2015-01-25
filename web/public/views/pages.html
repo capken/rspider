@@ -1,0 +1,27 @@
+
+<ol class="breadcrumb">
+  <li><a href="#/domains">All Domains</a></li>
+  <li class="active">{{domain}}</li>
+</ol>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th ng-repeat="header in headers">{{header}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="page in pages">
+      <td>{{page.url}}</td>
+      <td>{{page.created_at| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{page.last_cached_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{page.status_code}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <pagination total-items="totalPages" ng-model="currentPage" max-size="{{10}}" ng-change="pageChanged()"
+    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+    class="pagination" boundary-links="true"></pagination>
+</div>

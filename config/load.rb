@@ -6,10 +6,7 @@ require "logger"
 require "json"
 require "nokogiri"
 require "public_suffix"
-
-require "sinatra/activerecord"
-require "sinatra/base"
-require "sinatra/json"
+require "active_record"
 
 CODE_ROOT = File.join(
   File.expand_path(File.dirname(__FILE__)),
