@@ -13,9 +13,10 @@ angular.module('rspider', ['ui.router', 'ui.bootstrap'])
     });
 
     $stateProvider.state('pages', {
-      url: '/pages/:domain/{pageNum:int}',
+      url: '/pages/:domain?{pageNum:int}',
       templateUrl: 'views/pages.html',
-      controller: 'PageCtrl'
+      controller: 'PageCtrl',
+      reloadOnSearch: false
     });
   }
 ]);
