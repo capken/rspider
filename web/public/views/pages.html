@@ -4,6 +4,13 @@
   <li class="active">{{domain}}</li>
 </ol>
 
+<h3></h3>
+<progress>
+  <bar ng-repeat="bar in stacked" value="bar.percentage" type="{{bar.type}}">
+    <span>{{bar.count}}</span>
+  </bar>
+</progress>
+
 <table class="table table-striped">
   <thead>
     <tr>

@@ -20,6 +20,12 @@ get "/domains" do
   json count_by_domain.map { |k, v| { name: k, count: v} }
 end
 
+get "/pages/statistic" do
+  count_by_status = Page.where(domain: params[:domain]).
+    group(:status_code).count
+  json count_by_status.map { |k,v| { status: k.nil? ? '000' : k.to_s, count: v} }
+end
+
 get "/pages" do
   page_index = params[:p] || 1
   domain = params[:domain]

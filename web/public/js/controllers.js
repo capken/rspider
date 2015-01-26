@@ -30,5 +30,17 @@ angular.module('rspider')
     });
   };
 
+  var updateStatistic = function() {
+    API.getStatistic({
+      domain: $scope.domain
+    }, function(result) {
+      console.log(JSON.stringify(result));
+      $scope.totalURLs = result.total;
+      $scope.stacked = result.details; 
+    });
+  };
+
+  // start to render the web page
   updatePages($stateParams.pageNum);
+  setInterval(updateStatistic, 2000);
 });
