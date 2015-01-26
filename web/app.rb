@@ -23,16 +23,28 @@ end
 get "/pages/statistic" do
   count_by_status = Page.where(domain: params[:domain]).
     group(:status_code).count
-  json count_by_status.map { |k,v| { status: k.nil? ? '000' : k.to_s, count: v} }
+  json count_by_status.map { |k,v| { status: k, count: v} }
 end
 
 get "/pages" do
   page_index = params[:p] || 1
   domain = params[:domain]
 
-  total = Page.where(domain: domain).count
+  condition = "domain='#{domain}'"
 
-  pages_block = Page.where(domain: domain).
+  case params[:status]
+  when /All/
+  when /Cached/
+    condition += " and status_code=200"
+  when /Queued/
+    condition += " and status_code=0"
+  when /Failed/
+    condition += " and status_code>200"
+  end
+
+  total = Page.where(condition).count
+
+  pages_block = Page.where(condition).
      paginate(per_page: 10, page: page_index)
 
   json total: total, pages: pages_block

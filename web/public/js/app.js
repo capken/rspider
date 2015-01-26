@@ -13,7 +13,7 @@ angular.module('rspider', ['ui.router', 'ui.bootstrap'])
     });
 
     $stateProvider.state('pages', {
-      url: '/pages/:domain?{pageNum:int}',
+      url: '/pages/:domain?{pageNum:int}&{status:string}',
       templateUrl: 'views/pages.html',
       controller: 'PageCtrl',
       reloadOnSearch: false

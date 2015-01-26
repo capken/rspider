@@ -4,12 +4,12 @@
   <li class="active">{{domain}}</li>
 </ol>
 
-<h3></h3>
-<progress>
-  <bar ng-repeat="bar in stacked" value="bar.percentage" type="{{bar.type}}">
-    <span>{{bar.count}}</span>
-  </bar>
-</progress>
+<div class="btn-group btn-group-sm">
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'All'"   ><strong>Total {{statistic.total}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Queued'"><strong class="text-info">Queued {{statistic.queued}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Cached'"><strong class="text-success">Cached {{statistic.cached}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Failed'"><strong class="text-danger">Failed {{statistic.failed}}</strong></label>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -23,6 +23,14 @@
       <td>{{page.created_at| date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>{{page.last_cached_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>{{page.status_code}}</td>
+      <td>
+        <button type="button" class="btn btn-default btn-xs" title="Remove">
+          <i class="fa fa-trash-o"></i>
+        </button>
+        <button type="button" class="btn btn-default btn-xs" title="Recrawl">
+          <i class="fa fa-refresh"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
