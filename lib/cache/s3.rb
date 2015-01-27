@@ -16,14 +16,14 @@ module CACHE
     end
 
     def get(url)
-      obj = @bucket.objects[hash_of(url)]
+      obj = @bucket.objects[path_of(url)]
       yield obj.read if obj
     end
 
     def put(url, data, meta)
       compressed_data = Zlib::Deflate.deflate(data)
 
-      obj = @bucket.objects[hash_of(url)]
+      obj = @bucket.objects[path_of(url)]
       obj.write(compressed_data, {
         :acl => :public_read,
         :content_encoding => "deflate",
@@ -35,13 +35,17 @@ module CACHE
     end
 
     def exists?(url)
-      @bucket.objects[hash_of(url)].exists?
+      @bucket.objects[path_of(url)].exists?
     end
 
     private
 
-    def hash_of(url)
-      Digest::MD5.hexdigest url
+    def path_of(url)
+      uri = URI.parse url
+      domain = PublicSuffix.parse(uri.host).domain
+      md5 = Digest::MD5.hexdigest url
+
+      "#{domain}/#{md5}"
     end
 
   end

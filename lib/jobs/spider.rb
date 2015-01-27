@@ -2,7 +2,7 @@ class Spider
   @queue = :spider
 
   @curl = WWW::Crawler.new
-  @cache = CACHE::FileSystem.new
+  @cache = CACHE::Base.create(storage: STORAGE)
   @logger = Logger.new(STDOUT)
 
   @http = Net::HTTP.new("localhost", 4567)
