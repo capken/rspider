@@ -14,3 +14,5 @@ gem "sqlite3"
 gem "will_paginate"
 
 gem "resque"
+
+gem "aws-sdk-v1"

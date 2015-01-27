@@ -15,7 +15,7 @@ module WWW
         c.timeout = 8
         c.connect_timeout = 5
         c.headers["User-Agent"] = USER_AGENT
-        c.encoding = 'gzip,deflate'
+        c.encoding = "gzip,deflate"
         c.proxy_url = PRIVOXY_URL if opts[:proxy]
       end
     end
@@ -25,7 +25,7 @@ module WWW
         curl.perform
         case curl.response_code
         when 200
-          ['200', {'content-type' => curl.content_type }, [curl.body_str]]
+          ["200", {"content-type" => curl.content_type }, [curl.body_str]]
         else
           raise RetryException
         end
@@ -41,9 +41,9 @@ module WWW
         code = @curl.response_code
         retries += 1
         retry if retries < 3
-        [code.to_s, {}, ['Retry Failure']]
+        [code.to_s, {}, ["Retry Failure"]]
       rescue => e
-        ['777', {}, [ e.message ]]
+        ["777", {}, [ e.message ]]
       end
     end
   end

@@ -4,7 +4,8 @@
 require File.expand_path(File.dirname(__FILE__)) + "/../config/load"
 
 @curl = WWW::Crawler.new
-@cache = CACHE::FileSystem.new
+#@cache = CACHE::FileSystem.new
+@cache = CACHE::S3.new
 @logger = Logger.new(STDOUT)
 
 STDIN.each do |line|
