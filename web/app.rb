@@ -66,15 +66,15 @@ post "/pages/upload" do
   #urls = JSON.parse request.body.read.to_s
   urls = request.body.read.to_s.split "\n"
   urls.each do |url|
-    uri = URI.parse url
-    md5 = Digest::MD5.hexdigest url
 
-    page = Page.find_by(md5: md5)
+    page_url = WWW::URL.new url
+
+    page = Page.find_by(md5: page_url.md5)
     if page.nil?
       page = Page.new do |p|
         p.url = url
-        p.md5 = md5
-        p.domain = PublicSuffix.parse(uri.host).domain
+        p.md5 = page_url.md5
+        p.domain = page_url.domain
       end
       page.save
     end

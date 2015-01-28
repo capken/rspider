@@ -15,11 +15,16 @@ module CACHE
     def get(url)
       File.open(path_of(url)) do |file|
         yield file.read
-      end
+      end if exists?(url)
     end
 
     def put(url, data, meta)
-      File.open(path_of(url), 'w') do |file|
+      path = path_of url
+
+      dir = File.dirname path
+      FileUtils.mkdir_p(dir) unless Dir.exists? dir
+
+      File.open(path, 'w') do |file|
         file.puts data
       end
     end
@@ -30,12 +35,9 @@ module CACHE
 
     private
 
-    def hash_of(url)
-      Digest::MD5.hexdigest url
-    end
-
     def path_of(url)
-      File.join @bucket_path, hash_of(url)
+      page_url = WWW::URL.new url
+      File.join @bucket_path, page_url.domain, page_url.md5
     end
 
   end

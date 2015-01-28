@@ -58,5 +58,5 @@ angular.module('rspider')
   updatePages($stateParams.status, $stateParams.pageNum);
 
   updateStatistic();
-  //setInterval(updateStatistic, 2000);
+  setInterval(updateStatistic, 2000);
 });

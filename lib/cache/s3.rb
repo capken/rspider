@@ -41,11 +41,8 @@ module CACHE
     private
 
     def path_of(url)
-      uri = URI.parse url
-      domain = PublicSuffix.parse(uri.host).domain
-      md5 = Digest::MD5.hexdigest url
-
-      "#{domain}/#{md5}"
+      page_url = WWW::URL.new url
+      "#{page_url.domain}/#{page_url.md5}"
     end
 
   end

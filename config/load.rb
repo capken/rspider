@@ -15,6 +15,8 @@ CODE_ROOT = File.join(
   ".."
 ) unless defined? CODE_ROOT
 
+STORAGE = :s3
+
 %w[www cache extractor model jobs].each do |dir|
   Dir.glob(File.join(CODE_ROOT, "lib/#{dir}/*.rb")).each do |libname|
     warn "loading ==> #{libname}"
