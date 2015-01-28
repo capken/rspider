@@ -14,9 +14,9 @@ set :database, {
   database: CONFIG[:database]
 }
 
-get "/" do
-  redirect "index.html"
-end
+#get "/" do
+#  redirect "index.html"
+#end
 
 get "/domains" do
   count_by_domain = Page.group(:domain).count
