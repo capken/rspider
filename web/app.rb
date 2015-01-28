@@ -9,7 +9,10 @@ require "sinatra/activerecord"
 require "will_paginate"
 require "will_paginate/active_record" 
 
-set :database, {adapter: "sqlite3", database: "db.sqlite3"}
+set :database, { 
+  adapter: CONFIG[:adapter],
+  database: CONFIG[:database]
+}
 
 get "/" do
   redirect "index.html"

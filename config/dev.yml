@@ -1,0 +1,9 @@
+---
+:server: localhost
+:port: 4567
+:adapter: sqlite3
+:database: db.sqlite3
+:storage: :fs
+:s3_bucket: rspider
+:s3_region: us-west-1
+:fs_bucket: cache

@@ -2,10 +2,10 @@ class Spider
   @queue = :spider
 
   @curl = WWW::Crawler.new
-  @cache = CACHE::Base.create(storage: STORAGE)
+  @cache = CACHE::Base.create(storage: CONFIG[:storage])
   @logger = Logger.new(STDOUT)
 
-  @http = Net::HTTP.new("localhost", 4567)
+  @http = Net::HTTP.new(CONFIG[:server], CONFIG[:port])
 
   def self.perform(params)
     url, md5 = params["url"], params["md5"]

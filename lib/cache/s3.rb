@@ -6,11 +6,11 @@ module CACHE
     DEFAULT_BUCKET = "rspider"
 
     def initialize(opts = {})
-      bucket_name = opts[:bucket] || DEFAULT_BUCKET
+      bucket_name = CONFIG[:s3_bucket] || DEFAULT_BUCKET
       s3 = AWS::S3.new(
         :access_key_id => ENV["AWS_ACCESS_KEY_ID"],
         :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"],
-        :region => "us-west-1",
+        :region => CONFIG[:s3_region]
       )
       @bucket = s3.buckets[bucket_name]
     end

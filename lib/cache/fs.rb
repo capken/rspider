@@ -6,7 +6,7 @@ module CACHE
     DEFAULT_BUCKET = 'cache'
 
     def initialize(opts = {})
-      @bucket = opts[:bucket] || DEFAULT_BUCKET
+      @bucket = CONFIG[:fs_bucket] || DEFAULT_BUCKET
 
       @bucket_path = File.join CODE_ROOT, @bucket
       FileUtils.mkdir_p(@bucket_path) unless Dir.exists? @bucket_path
