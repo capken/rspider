@@ -1,4 +1,5 @@
-source "http://ruby.taobao.org"
+source 'https://rubygems.org'
+#source "http://ruby.taobao.org"
 
 gem "curb"
 gem "nokogiri"
@@ -16,3 +17,5 @@ gem "will_paginate"
 gem "resque"
 
 gem "aws-sdk-v1"
+
+gem "unicorn"
