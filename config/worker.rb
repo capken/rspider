@@ -14,7 +14,12 @@ CODE_ROOT = File.join(
   ".."
 ) unless defined? CODE_ROOT
 
-STORAGE = :s3
+yml = File.open(File.join(CODE_ROOT, 'config', 'dev.yml')) do |file|
+  file.read
+end
+
+CONFIG = YAML.load(yml)
+warn CONFIG
 
 %w[www cache jobs].each do |dir|
   Dir.glob(File.join(CODE_ROOT, "lib/#{dir}/*.rb")).each do |libname|
