@@ -48,7 +48,8 @@ get "/pages" do
   total = Page.where(condition).count
 
   pages_block = Page.where(condition).
-     paginate(per_page: 10, page: page_index)
+     paginate(per_page: 10, page: page_index).
+     order('updated_at DESC')
 
   json total: total, pages: pages_block
 end
@@ -63,6 +64,20 @@ put "/pages/:md5" do
 
   status page.nil? ? 404 : 200
   json md5: params[:md5]
+end
+
+
+post "/pages/retry" do
+  count = 0
+
+  Page.where(status_code: 777).each do |page|
+    page.status_code = 0
+    Resque.enqueue(Spider, {url: page.url, md5: page.md5})
+    page.save
+    count += 1
+  end
+
+  json totalRetriedUrls: count
 end
 
 post "/pages/upload" do

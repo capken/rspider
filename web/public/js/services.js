@@ -12,6 +12,12 @@ angular.module('rspider')
         callback(data);
       })
     },
+    retryPages: function(callback) {
+      $http.post('pages/retry')
+      .success(function(data) {
+        callback(data);
+      })
+    },
     getStatistic: function(params, callback) {
       $http.get('pages/statistic', {params: params})
       .success(function(data) {

@@ -55,8 +55,18 @@ angular.module('rspider')
     });
   };
 
-  updatePages($stateParams.status, $stateParams.pageNum);
+  $scope.retryAll = function() {
+    console.log("retry all failed pages ...");
+    API.retryPages(function(data) {
+      console.log(JSON.stringify(data));
+    });
+  }
 
+  updatePages($stateParams.status, $stateParams.pageNum);
   updateStatistic();
-  setInterval(updateStatistic, 2000);
+
+  setInterval(function() {
+    updateStatistic();
+    updatePages($scope.selectedPageStatus, $scope.currentPage);
+  }, 5000);
 });

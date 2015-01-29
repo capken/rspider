@@ -11,6 +11,11 @@
   <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Failed'"><strong class="text-danger">Failed {{statistic.failed || 0}}</strong></label>
 </div>
 
+<button class="btn btn-primary btn-sm" ng-show="selectedPageStatus == 'Failed'" 
+  ng-click="retryAll()" ng-disabled="statistic.failed == null">
+  <strong>Retry All</strong>
+</button>
+
 <table class="table table-striped">
   <thead>
     <tr>
