@@ -5,10 +5,10 @@
 </ol>
 
 <div class="btn-group btn-group-sm">
-  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'All'"   ><strong>Total {{statistic.total}}</strong></label>
-  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Queued'"><strong class="text-info">Queued {{statistic.queued}}</strong></label>
-  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Cached'"><strong class="text-success">Cached {{statistic.cached}}</strong></label>
-  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Failed'"><strong class="text-danger">Failed {{statistic.failed}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'All'"   ><strong>Total {{statistic.total || 0}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Queued'"><strong class="text-info">Queued {{statistic.queued || 0}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Cached'"><strong class="text-success">Cached {{statistic.cached || 0}}</strong></label>
+  <label class="btn btn-default" ng-model="selectedPageStatus" btn-radio="'Failed'"><strong class="text-danger">Failed {{statistic.failed || 0}}</strong></label>
 </div>
 
 <table class="table table-striped">
