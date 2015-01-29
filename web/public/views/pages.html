@@ -35,6 +35,9 @@
         <button type="button" class="btn btn-default btn-xs" title="Recrawl">
           <i class="fa fa-refresh"></i>
         </button>
+        <a href="/pages/{{page.md5}}" target="_blank" ng-show="page.status_code == 200" class="btn btn-default btn-xs" title="View">
+          <i class="fa fa-link"></i>
+        </a>
       </td>
     </tr>
   </tbody>

@@ -9,6 +9,8 @@ require "sinatra/activerecord"
 require "will_paginate"
 require "will_paginate/active_record" 
 
+set :cache, CACHE::Base.create(storage: CONFIG[:storage])
+
 set :database, { 
   adapter: CONFIG[:adapter],
   database: CONFIG[:database]
@@ -52,6 +54,34 @@ get "/pages" do
      order('updated_at DESC')
 
   json total: total, pages: pages_block
+end
+
+get "/pages/:md5" do
+  page = Page.find_by(md5: params[:md5])
+
+  if page.nil?
+    status 404
+    "page is not found"
+  else
+    case CONFIG[:storage]
+    when :s3
+      redirect "https://s3-#{CONFIG[:s3_region]}.amazonaws.com/rspider/#{page.domain}/#{page.md5}"
+    when :fs
+      warn "======"
+      warn page
+      warn "======"
+      code = settings.cache.exists?(page.url) ? 200 : 404
+      body = nil
+
+      settings.cache.get page.url do |content|
+        warn content
+        body = content
+      end
+
+      status code
+      body || "#{page.url} is not found"
+    end
+  end
 end
 
 put "/pages/:md5" do
