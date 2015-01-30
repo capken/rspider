@@ -10,6 +10,7 @@ require "will_paginate"
 require "will_paginate/active_record" 
 
 set :cache, CACHE::Base.create(storage: CONFIG[:storage])
+set :extractor, Extractor::Base.new
 
 set :database, { 
   adapter: CONFIG[:adapter],
@@ -67,20 +68,34 @@ get "/pages/:md5" do
     when :s3
       redirect "https://s3-#{CONFIG[:s3_region]}.amazonaws.com/rspider/#{page.domain}/#{page.md5}"
     when :fs
-      warn "======"
-      warn page
-      warn "======"
       code = settings.cache.exists?(page.url) ? 200 : 404
       body = nil
 
       settings.cache.get page.url do |content|
-        warn content
         body = content
       end
 
       status code
       body || "#{page.url} is not found"
     end
+  end
+end
+
+get "/pages/:md5/extract" do
+  page = Page.find_by(md5: params[:md5])
+
+  if page.nil?
+    status 404
+    "page is not found"
+  else
+    result = {}
+    settings.cache.get(page.url) do |body|
+      settings.extractor.select(page.url, body) do |record|
+        result = record
+      end
+    end
+
+    json result
   end
 end
 

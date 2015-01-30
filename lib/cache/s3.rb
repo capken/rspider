@@ -17,7 +17,8 @@ module CACHE
 
     def get(url)
       obj = @bucket.objects[path_of(url)]
-      yield obj.read if obj
+      #TODO: use the encoding info in object meta
+      yield Zlib::Inflate.inflate(obj.read).force_encoding('UTF-8') if obj
     end
 
     def put(url, data, meta)
