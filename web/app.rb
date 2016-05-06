@@ -126,10 +126,8 @@ post "/pages/retry" do
 end
 
 post "/pages/upload" do
-  count = 0
-
-  request.body.read.to_s.each_line do |url|
-    count += 1
+  urls = request.body.read.to_s.split "\n"
+  urls.each do |url|
     page_url = WWW::URL.new url
 
     page = Page.find_by(md5: page_url.md5)
@@ -145,5 +143,5 @@ post "/pages/upload" do
     Resque.enqueue(Spider, {url: page.url, md5: page.md5})
   end
 
-  json totalUrls: count
+  json totalUrls: urls.size
 end
