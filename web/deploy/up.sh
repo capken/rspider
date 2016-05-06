@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd $HOME/codes/rspider/web/
-unicorn -c deploy/unicorn.rb -D
-sudo cp deploy/nginx.conf /etc/nginx/nginx.conf
-sudo /etc/init.d/nginx start
+export RSPIDER_HOME=$HOME/codes/rspider/web
+unicorn -c $RSPIDER_HOME/deploy/unicorn.rb -D
+sudo /usr/sbin/nginx -c $RSPIDER_HOME/deploy/nginx.conf
